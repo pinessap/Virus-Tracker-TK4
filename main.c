@@ -108,7 +108,7 @@ int interactions(char * output, int n, int max_i)
     int l = 0;
     for(int i = 0; i<max_i; i++)
     {
-        fprintf(output_file,"%d | ",i+1); //Interkations-ID
+        fprintf(output_file,"%d | ",i+1); //Interaktions-ID
         j = rand() % n + 1;
         fprintf(output_file,"%d | ",j); //Person 1 ID
         do
