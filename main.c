@@ -27,19 +27,56 @@ int main()
     */
 
     //TEST: id_name
-    /*
-    id_name("C:\\Users\\inesp\\OneDrive\\FH\\BMR2\\PAD\\PROJEKT\\Testdatenerstellung\\names.csv",
-              "C:\\Users\\inesp\\OneDrive\\FH\\BMR2\\PAD\\PROJEKT\\Testdatenerstellung\\test_id.csv",num_pers);
+    /*id_name("C:\\Users\\inesp\\OneDrive\\FH\\BMR2\\PAD\\PROJEKT\\Testdatenerstellung\\names.csv",
+              "C:\\Users\\inesp\\OneDrive\\FH\\BMR2\\PAD\\PROJEKT\\Testdatenerstellung\\test_id.csv",10);
     */
 
     //TEST: interactions
-    //interactions("C:\\Users\\inesp\\OneDrive\\FH\\BMR2\\PAD\\PROJEKT\\Testdatenerstellung\\library\\interactions.csv", num_pers, num_interact,time_period);
- 
+    interactions("C:\\Users\\inesp\\OneDrive\\FH\\BMR2\\PAD\\PROJEKT\\Testdatenerstellung\\interactions.csv", num_pers, num_interact,time_period);
+
     //TEST: search_id
-    char name[] = "Adele";
+    /*char name[] = "Adele";
     int test = 0;
     test = search_id("C:\\Users\\inesp\\OneDrive\\FH\\BMR2\\PAD\\PROJEKT\\Testdatenerstellung\\test_id.csv", name);
-    printf("%d",test);
+    printf("%d",test);*/
+
+    //interactions_array("C:\\Users\\inesp\\Desktop\\interactions.csv");
+    /*char * input = "C:\\Users\\inesp\\Desktop\\interactions.csv";
+    FILE *input_file=fopen(input, "r");
+    if (input_file == NULL)
+    {
+        printf("%s konnte nicht geöffnet werden.",input_file);
+        return -1;
+    }
+    fpos_t position;
+    fgetpos(input_file, &position);
+    int lines = count_lines(input_file);
+    rewind(input_file);
+    int *i_id, *id_1, *id_2, *time;
+    i_id = malloc(lines*sizeof(int));
+    id_1 = malloc(lines*sizeof(int));
+    id_2 = malloc(lines*sizeof(int));
+    time = malloc(lines*sizeof(int));
+    int i = 0, j = 0;
+    while(j != lines)
+    {
+        fsetpos(input_file, &position);
+        while(fscanf(input_file,"%d | %d | %d | %d\n",&i_id[i], &id_1[i], &id_2[i], &time[i])!=EOF) //speichert jede Spalte in ein eigenes array
+        {
+            i++;
+        }
+        fgetpos(input_file, &position);
+        j++;
+    }
+
+    //for(i=0; i < lines; i++)
+      //printf("time[%d] = %d\n", i+1, time[i]);
+
+    struct node* head = NULL;
+    char name[] = "Adele";
+    add_back(head,name,10,i_id,id_1,id_2,time);
+
+    fclose(input_file);*/
 
     return 0;
 }

@@ -57,6 +57,7 @@ int id_name(char * input, char * output, int n)
     return 0;
 }
 
+
 int interactions(char * output, int n, int max_i, int t)
 {
     srand(time(NULL));
@@ -113,10 +114,7 @@ int search_id(char * input, char search_name[])
     rewind(input_file);
     int *id_array;
     char **name_array;
-    //for(int i=0;i<lines;i++)
-    //{
-    //name_array[i] = malloc(sizeof(char*)*lines);
-    //}
+
     id_array = malloc(lines*sizeof(int));
     name_array = malloc(sizeof(char*)*lines);
     for(int k = 0; k<lines;k++)
@@ -151,5 +149,41 @@ int search_id(char * input, char search_name[])
 
     fclose(input_file);
     return i;
+    return 0;
+}
+
+int interactions_array(char * input)
+{
+    FILE *input_file=fopen(input, "r");
+    if (input_file == NULL)
+    {
+        printf("%s konnte nicht geöffnet werden.",input_file);
+        return -1;
+    }
+    fpos_t position;
+    fgetpos(input_file, &position);
+    int lines = count_lines(input_file);
+    rewind(input_file);
+    int *i_id, *id_1, *id_2, *time;
+    i_id = malloc(lines*sizeof(int));
+    id_1 = malloc(lines*sizeof(int));
+    id_2 = malloc(lines*sizeof(int));
+    time = malloc(lines*sizeof(int));
+    int i = 0, j = 0;
+    while(j != lines)
+    {
+        fsetpos(input_file, &position);
+        while(fscanf(input_file,"%d | %d | %d | %d\n",&i_id[i], &id_1[i], &id_2[i], &time[i])!=EOF) //speichert jede Spalte in ein eigenes array
+        {
+            i++;
+        }
+        fgetpos(input_file, &position);
+        j++;
+    }
+
+    //for(i=0; i < lines; i++)
+      //printf("time[%d] = %d\n", i+1, time[i]);
+
+    fclose(input_file);
     return 0;
 }
