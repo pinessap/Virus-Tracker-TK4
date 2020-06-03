@@ -32,4 +32,11 @@ int id_name(char * input, char * output, int n);
 */
 int interactions(char * output, int n, int max_i, int t);
 
+/*
+-> Name wird übergeben
+-> gibt ID zurück
+*/
+int search_id(char * input, char search_name[]);
+
+
 #endif //testdaten_h

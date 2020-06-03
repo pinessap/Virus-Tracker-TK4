@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
+#include <string.h>
 #include "testdaten.h"
 #define time_period 14                          //Zeitraum, in dem uns die Interaktionen interessieren (14 Tage Inkubationszeit)
 #define num_pers 10                             //Anzahl an Leute, die generiert werden soll
@@ -31,6 +33,13 @@ int main()
     */
 
     //TEST: interactions
-    interactions("C:\\Users\\inesp\\OneDrive\\FH\\BMR2\\PAD\\PROJEKT\\Testdatenerstellung\\library\\interactions.csv", num_pers, num_interact,time_period);
+    //interactions("C:\\Users\\inesp\\OneDrive\\FH\\BMR2\\PAD\\PROJEKT\\Testdatenerstellung\\library\\interactions.csv", num_pers, num_interact,time_period);
+ 
+    //TEST: search_id
+    char name[] = "Adele";
+    int test = 0;
+    test = search_id("C:\\Users\\inesp\\OneDrive\\FH\\BMR2\\PAD\\PROJEKT\\Testdatenerstellung\\test_id.csv", name);
+    printf("%d",test);
+
     return 0;
 }
