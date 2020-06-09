@@ -27,14 +27,14 @@ int id_name(char * input, char * output, int n)
     FILE *input_file=fopen(input, "r");
     if (input_file == NULL)
     {
-        printf("%s konnte nicht geöffnet werden.",input_file);
+        printf("%s konnte nicht geoeffnet werden.",input_file);
         return -1;
     }
 
     FILE *output_file=fopen(output, "w");
     if (output_file == NULL)
     {
-        printf("%s konnte nicht geöffnet werden.",output_file);
+        printf("%s konnte nicht geoeffnet werden.",output_file);
         return -2;
     }
 
@@ -79,7 +79,7 @@ int interactions(char * output, int n, int max_i, int t)
     FILE *output_file=fopen(output, "w");
     if (output_file == NULL)
     {
-        printf("%s konnte nicht geöffnet werden.",output_file);
+        printf("%s konnte nicht geoeffnet werden.",output_file);
         return -1;
     }
 
@@ -115,7 +115,7 @@ int search_id(char * input, char search_name[])
     FILE *input_file=fopen(input, "r");
     if (input_file == NULL)
     {
-        printf("%s konnte nicht geöffnet werden.",input_file);
+        printf("%s konnte nicht geoeffnet werden.",input_file);
         return -1;
     }
     int id = 0;
@@ -177,7 +177,7 @@ int interactions_array(char * input)
     FILE *input_file=fopen(input, "r");
     if (input_file == NULL)
     {
-        printf("%s konnte nicht geöffnet werden.",input_file);
+        printf("%s konnte nicht geoeffnet werden.",input_file);
         return -1;
     }
     fpos_t position;
