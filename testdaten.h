@@ -2,6 +2,7 @@
 #define testtdaten_h
 
 //header
+
 /*
 -> zählt Zeilenanzahl einer Datei
 -> parameter:   - Verlauf der Datei
@@ -14,7 +15,7 @@ int count_lines(FILE * input);
 -> output: Person-ID | Name
 -> parameter:
                 - Verlauf der input-Textdatei
-                - Verlauf der output-Textdatei 
+                - Verlauf der output-Textdatei (mit der ID)
                 - Anzahl an Personen, die generiert werden sollen
 -> return: erfolgreich = 0, Fehler beim input = -1, Fehler beim output = -2
 */
@@ -35,13 +36,10 @@ int interactions(char * output, int n, int max_i, int t);
 /*
 -> Name wird übergeben
 -> gibt ID zurück
+-> -2 falls Name nicht gefunden wird
 */
 int search_id(char * input, char search_name[]);
 
-/*
--> speichert alle Spalten der interactions.csv in eigene arrays
-(kann auch in die main gepackt werden, um die arrays anderen Funktionen zu übergeben)
-*/
 int interactions_array(char * input);
 
 #endif //testdaten_h

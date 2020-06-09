@@ -20,7 +20,7 @@ int count_lines(FILE * input)
 
 int id_name(char * input, char * output, int n)
 {
-
+    srand(time(NULL));
     char c;
 
     //Dateien öffnen/erstellen
@@ -38,15 +38,26 @@ int id_name(char * input, char * output, int n)
         return -2;
     }
 
+    int names = count_lines(input_file);
+    rewind(input_file);
+
     //ID's generieren
     for(int i = 0; i<n; i++)
     {
-        fprintf(output_file,"%d | ",i+1);
+        int line = rand()%names;
+        rewind(input_file);
+        char name[20] = "";
+
+        fprintf(output_file,"%d | ",i+1); //ID
+
         //Namen kopieren
-        while ((c=fgetc(input_file)) != '\n')
+        for(int j = 0; j<line; j++) //springt zur Zeile
         {
-            fputc(c,output_file);
+            while ((c=fgetc(input_file)) != '\n');
         }
+
+        fscanf(input_file," %s", name);
+        fprintf(output_file,"%s ",name);
         fprintf(output_file,"\n");
     }
 
@@ -109,9 +120,10 @@ int search_id(char * input, char search_name[])
     }
     int id = 0;
     fpos_t position;
-    fgetpos(input_file, &position);
-    int lines = count_lines(input_file);
+    fgetpos(input_file, &position); //Anfangsposition wird gespeichert
+    int lines = count_lines(input_file); //Zeilenanzahl wird gespeichert
     rewind(input_file);
+
     int *id_array;
     char **name_array;
 
@@ -121,6 +133,7 @@ int search_id(char * input, char search_name[])
     {
         name_array[k] = malloc(20*sizeof(char));
     }
+
     int i = 0;
     int j = 0;
     char string[20];
@@ -135,15 +148,22 @@ int search_id(char * input, char search_name[])
         fgetpos(input_file, &position);
         j++;
     }
-    int z = 0;
-    while(z != 0)
-    {
+    int z;
+    //do
+    //{
         for(i=0;i<lines;i++)
         {
-            strcmp(search_name,name_array[i]);
+            z=strcmp(search_name,name_array[i]);
+            if(z==0)
+            {
+                break;
+            }
+        }
+        if(z!=0)
+        {
+            i=-2;
         }
 
-    }
     /*for(i=0; i < lines; i++)
       printf("name[%d] = %s\n", i+1, name_array[i]);*/
 
