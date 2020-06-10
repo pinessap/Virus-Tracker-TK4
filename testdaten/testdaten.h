@@ -42,4 +42,6 @@ int search_id(char * input, char search_name[]);
 
 int interactions_array(char * input);
 
+char *search_name(char * input, int search_id);
+
 #endif //testdaten_h

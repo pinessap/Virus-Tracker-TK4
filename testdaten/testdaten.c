@@ -90,7 +90,7 @@ int interactions(char * output, int n, int max_i, int t)
     int l = 0;
     for(int i = 0; i<max_i; i++)
     {
-        fprintf(output_file,"%d | ",i+1); //Interkations-ID
+        fprintf(output_file,"%d | ",i+1); //Interaktions-ID
         j = rand() % n + 1;
         fprintf(output_file,"%d | ",j); //Person 1 ID
         do
@@ -150,8 +150,7 @@ int search_id(char * input, char search_name[])
         j++;
     }
     int z;
-    //do
-    //{
+
         for(i=0;i<lines;i++)
         {
             z=strcmp(search_name,name_array[i]);
@@ -170,7 +169,6 @@ int search_id(char * input, char search_name[])
 
     fclose(input_file);
     return i;
-    return 0;
 }
 
 int interactions_array(char * input)
@@ -208,3 +206,69 @@ int interactions_array(char * input)
     fclose(input_file);
     return 0;
 }
+
+char *search_name(char * input, int search_id)
+{
+    FILE *input_file=fopen(input, "r");
+    if (input_file == NULL)
+    {
+        printf("%s konnte nicht geoeffnet werden.",input_file);
+        exit(-1);
+        //return -1;
+    }
+    char name[20];
+    fpos_t position;
+    fgetpos(input_file, &position); //Anfangsposition wird gespeichert
+    int lines = count_lines(input_file); //Zeilenanzahl wird gespeichert
+    rewind(input_file);
+
+    int *id_array;
+    char **name_array;
+
+    id_array = malloc(lines*sizeof(int));
+    name_array = malloc(sizeof(char*)*lines);
+    for(int k = 0; k<lines;k++)
+    {
+        name_array[k] = malloc(20*sizeof(char));
+    }
+
+    int i = 0;
+    int j = 0;
+    char string[20];
+    while(j != lines)
+    {
+        fsetpos(input_file, &position);
+        while(fscanf(input_file,"%d | %s\n",&id_array[i], string)!=EOF) //speichert jede Spalte in ein eigenes array
+        {
+            strcpy(name_array[i],string);
+            i++;
+        }
+        fgetpos(input_file, &position);
+        j++;
+    }
+    int z;
+
+        for(i=0;i<lines;i++)
+        {
+            if(search_id == id_array[i])
+            {
+                z = 0;
+                fclose(input_file);
+                char *return_string = malloc(20);
+                strcpy(return_string,name_array[i]);
+                return return_string;
+            }
+        }
+        if(z!=0)
+        {
+            fclose(input_file);
+            printf("FEHLER. ID wurde nicht gefunden.");
+            exit(-2);
+            //return -2;
+        }
+
+    /*for(i=0; i < lines; i++)
+      printf("name[%d] = %s\n", i+1, name_array[i]);*/
+
+}
+
