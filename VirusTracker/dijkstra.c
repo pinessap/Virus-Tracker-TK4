@@ -3,7 +3,7 @@
 #include <conio.h>
 #include "dijkstra.h"
 
-int dijkstra_algo(int contact[PPL][PPL], int patient_null)
+int dijkstra_algo(int PPL, int contact[PPL][PPL], int patient_null)
 {
     int contmin[PPL][PPL]; //Kontaktminute zwischen zwei Personen
     int mintime[PPL];      //die Minuten an Zeit bei Kontakt

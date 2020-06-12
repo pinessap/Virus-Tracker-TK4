@@ -5,7 +5,7 @@
 #include "testdaten.h"
 #include "dijkstra.h"
 #include "graphviz.h"
-#define PPL 99
+#define people 99
 //#define time_period 1                            //Zeitraum, in dem uns die Interaktionen interessieren (in Tagen)
 //#define num_pers 100                             //Anzahl an Leute, die generiert werden soll
 //#define num_interact 500                         //Anzahl an Interaktionen insgesamt
@@ -63,9 +63,9 @@ int main()
 
 
     printf("\nPersonen mit den laengsten Interaktionen werden ermittelt...\n");
-    int infect[PPL][PPL];
+    int infect[people][people];
     int node_count = 0;
-    node_count = dijkstra_algo(infect, name_id);
+    node_count = dijkstra_algo(people,infect, name_id);
 
     printf("Graphviz-Code wird ausgegeben...\n\n");
     printf("--------------------Graphviz-Code--------------------\n");
