@@ -1,6 +1,5 @@
 #ifndef testdaten_h
 #define testtdaten_h
-
 //header
 //------------------------------------------------------------------------
 /*
@@ -54,6 +53,7 @@ int search_id(char * input, char search_name[]);
 -> gibt Namen (Pointer) zurück
 */
 char *search_name(char * input, int search_id);
+
 
 
 #endif //testdaten_h

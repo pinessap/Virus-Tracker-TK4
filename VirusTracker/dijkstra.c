@@ -8,16 +8,15 @@ int dijkstra_algo(int PPL, int contact[PPL][PPL], int patient_null)
     int contmin[PPL][PPL]; //Kontaktminute zwischen zwei Personen
     int mintime[PPL];      //die Minuten an Zeit bei Kontakt
     int visited[PPL];      //welche Nodes schon besucht wurden
+
     int i;
     int j;
-    int v;
+    int v=0;
     //hier kommen die Deklarierungen fuer die Werte der Matrix
     int conID;
     int pers_a;
     int pers_b;
     int min;
-
-
 
     for(i=0; i<PPL; i++)    //erstmal beide Matrizen mit 0 initialisieren
     {
@@ -38,7 +37,7 @@ int dijkstra_algo(int PPL, int contact[PPL][PPL], int patient_null)
     FILE *output_file=fopen("infektionsweg.csv", "w");
     if (output_file == NULL)
     {
-        printf("%s konnte nicht geoeffnet werden.",output_file);
+        printf("%s konnte nicht geoeffnet werden.","infektionsweg.csv");
         return -2;
     }
 
@@ -53,10 +52,10 @@ int dijkstra_algo(int PPL, int contact[PPL][PPL], int patient_null)
     fclose(interaction);
     for(i=0; i<=PPL; i++)
     {
-
         mintime[i]=0;
         visited[i]=0;
     }
+
     int counter = 0;
 
     for(j=1; j<=PPL; j++)
@@ -67,21 +66,20 @@ int dijkstra_algo(int PPL, int contact[PPL][PPL], int patient_null)
             mintime[i]=mintime[i-1];
             if(mintime[i]<contmin[patient_null][i] && visited[i]==0)
             {
+                //printf("IF min time %d\n", mintime[i]);
                 v=i;
                 mintime[i]=contmin[patient_null][v];
+                //printf("AFTER min time %d\n", mintime[i]);
 
             }
             visited[v]=1;
         }
-
-            //printf("Die Uebertragung der Krankheit ueber den Personen findet wie folgt statt: %d -> %d\n",patient_null, v);
-            //printf("Sie hatten %d Minuten miteinander Kontakt.\n", mintime[v]);
-            fprintf(output_file,"%d | %d | %d\n",patient_null, v,mintime[v]);
-
+        //printf("Die Uebertragung der Krankheit ueber den Personen findet wie folgt statt: %d -> %d\n",patient_null, v);
+        //printf("Sie hatten %d Minuten miteinander Kontakt.\n", mintime[v]);
+        fprintf(output_file,"%d | %d | %d\n",patient_null, v,mintime[v]);
         visited[patient_null]=1;
-        visited[v]=1;
+        //visited[v]=1;
         patient_null = v;
-
 
         if(mintime[v]==0)
         {
@@ -89,8 +87,8 @@ int dijkstra_algo(int PPL, int contact[PPL][PPL], int patient_null)
         }
 
     }
-    printf("Letzte moeglich infizierte Personen-ID: %d\n", v);
+    printf("Letzte infizierte Peron ID %d\n", v);
     fclose(output_file);
-    //printf("%d", counter);
-    return counter;
+
+return counter;
 }

@@ -22,7 +22,7 @@ void graphviz(int node_count, char * input_weg)
     //printf("\n\nTEST %d\n\n",node_count);
 
     int i = 0;
-    int j = 0;
+    //int j = 0;
     int *id_1, *id_2, *time;
     id_1 = malloc(node_count*sizeof(int));
     id_2 = malloc(node_count*sizeof(int));

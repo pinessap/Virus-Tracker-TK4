@@ -3,7 +3,7 @@
 #include <time.h>
 #include <string.h>
 #include <conio.h>
-#define people 99
+#define people 100
 //#define time_period 1                            //Zeitraum, in dem uns die Interaktionen interessieren (in Tagen)
 //#define num_pers 100                             //Anzahl an Leute, die generiert werden soll
 //#define num_interact 500                         //Anzahl an Interaktionen insgesamt
@@ -308,9 +308,6 @@ char *search_name(char * input, int search_id)
         exit(-1);
         //return -1;
     }
-    //char name[20];
-    fpos_t position;
-    fgetpos(input_file, &position); //Anfangsposition wird gespeichert
     int lines = count_lines(input_file); //Zeilenanzahl wird gespeichert
     rewind(input_file);
 
@@ -325,18 +322,13 @@ char *search_name(char * input, int search_id)
     }
 
     int i = 0;
-    int j = 0;
+    //int j = 0;
     char string[20];
-    while(j != lines)
+
+    while(fscanf(input_file,"%d | %s\n",&id_array[i], string)!=EOF) //speichert jede Spalte in ein eigenes array
     {
-        fsetpos(input_file, &position);
-        while(fscanf(input_file,"%d | %s\n",&id_array[i], string)!=EOF) //speichert jede Spalte in ein eigenes array
-        {
-            strcpy(name_array[i],string);
-            i++;
-        }
-        fgetpos(input_file, &position);
-        j++;
+        strcpy(name_array[i],string);
+        i++;
     }
     int z;
 
@@ -369,16 +361,15 @@ int dijkstra_algo(int PPL, int contact[PPL][PPL], int patient_null)
     int contmin[PPL][PPL]; //Kontaktminute zwischen zwei Personen
     int mintime[PPL];      //die Minuten an Zeit bei Kontakt
     int visited[PPL];      //welche Nodes schon besucht wurden
+
     int i;
     int j;
-    int v;
+    int v=0;
     //hier kommen die Deklarierungen fuer die Werte der Matrix
     int conID;
     int pers_a;
     int pers_b;
     int min;
-
-
 
     for(i=0; i<PPL; i++)    //erstmal beide Matrizen mit 0 initialisieren
     {
@@ -414,10 +405,10 @@ int dijkstra_algo(int PPL, int contact[PPL][PPL], int patient_null)
     fclose(interaction);
     for(i=0; i<=PPL; i++)
     {
-
         mintime[i]=0;
         visited[i]=0;
     }
+
     int counter = 0;
 
     for(j=1; j<=PPL; j++)
@@ -428,21 +419,20 @@ int dijkstra_algo(int PPL, int contact[PPL][PPL], int patient_null)
             mintime[i]=mintime[i-1];
             if(mintime[i]<contmin[patient_null][i] && visited[i]==0)
             {
+                //printf("IF min time %d\n", mintime[i]);
                 v=i;
                 mintime[i]=contmin[patient_null][v];
+                //printf("AFTER min time %d\n", mintime[i]);
 
             }
             visited[v]=1;
         }
-
-            //printf("Die Uebertragung der Krankheit ueber den Personen findet wie folgt statt: %d -> %d\n",patient_null, v);
-            //printf("Sie hatten %d Minuten miteinander Kontakt.\n", mintime[v]);
-            fprintf(output_file,"%d | %d | %d\n",patient_null, v,mintime[v]);
-
+        //printf("Die Uebertragung der Krankheit ueber den Personen findet wie folgt statt: %d -> %d\n",patient_null, v);
+        //printf("Sie hatten %d Minuten miteinander Kontakt.\n", mintime[v]);
+        fprintf(output_file,"%d | %d | %d\n",patient_null, v,mintime[v]);
         visited[patient_null]=1;
-        visited[v]=1;
+        //visited[v]=1;
         patient_null = v;
-
 
         if(mintime[v]==0)
         {
@@ -450,10 +440,10 @@ int dijkstra_algo(int PPL, int contact[PPL][PPL], int patient_null)
         }
 
     }
-    printf("Letzte moeglich infizierte Personen-ID: %d\n", v);
+    printf("Letzte infizierte Peron ID %d\n", v);
     fclose(output_file);
-    //printf("%d", counter);
-    return counter;
+
+return counter;
 }
 
 void graphviz(int node_count, char * input_weg)
@@ -475,7 +465,7 @@ void graphviz(int node_count, char * input_weg)
     //printf("\n\nTEST %d\n\n",node_count);
 
     int i = 0;
-    int j = 0;
+    //int j = 0;
     int *id_1, *id_2, *time;
     id_1 = malloc(node_count*sizeof(int));
     id_2 = malloc(node_count*sizeof(int));

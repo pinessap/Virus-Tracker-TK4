@@ -28,14 +28,14 @@ int id_name(char * input, char * output, int n)
     FILE *input_file=fopen(input, "r");
     if (input_file == NULL)
     {
-        printf("%s konnte nicht geoeffnet werden.",input_file);
+        printf("%s konnte nicht geoeffnet werden.",input);
         return -1;
     }
 
     FILE *output_file=fopen(output, "w");
     if (output_file == NULL)
     {
-        printf("%s konnte nicht geoeffnet werden.",output_file);
+        printf("%s konnte nicht geoeffnet werden.",output);
         return -2;
     }
 
@@ -80,7 +80,7 @@ int interactions(char * output, int n, int max_i, int t)
     FILE *output_file=fopen(output, "w");
     if (output_file == NULL)
     {
-        printf("%s konnte nicht geoeffnet werden.",output_file);
+        printf("%s konnte nicht geoeffnet werden.",output);
         return -1;
     }
 
@@ -116,7 +116,7 @@ int search_id(char * input, char search_name[])
     FILE *input_file=fopen(input, "r");
     if (input_file == NULL)
     {
-        printf("%s konnte nicht geoeffnet werden.",input_file);
+        printf("%s konnte nicht geoeffnet werden.",input);
         return -1;
     }
     //int id = 0;
@@ -138,18 +138,14 @@ int search_id(char * input, char search_name[])
     int i = 0;
     //int j = 0;
     char string[20];
-    //while(j != lines)
-    //{
-        //fsetpos(input_file, &position);
-        while(fscanf(input_file,"%d | %s\n",&id_array[i], string)!=EOF) //speichert jede Spalte in ein eigenes array
-        {
-            strcpy(name_array[i],string);
-            //printf("%s - %s",name_array[i],string);
-            i++;
-        }
-        //fgetpos(input_file, &position);
-        //j++;
-    //}
+   
+    while(fscanf(input_file,"%d | %s\n",&id_array[i], string)!=EOF) //speichert jede Spalte in ein eigenes array
+    {
+        strcpy(name_array[i],string);
+      //printf("%s - %s",name_array[i],string);
+        i++;
+    }
+     
     int z;
 
         for(i=0;i<lines;i++)
@@ -177,13 +173,10 @@ char *search_name(char * input, int search_id)
     FILE *input_file=fopen(input, "r");
     if (input_file == NULL)
     {
-        printf("%s konnte nicht geoeffnet werden.",input_file);
+        printf("%s konnte nicht geoeffnet werden.",input);
         exit(-1);
         //return -1;
     }
-    //char name[20];
-    fpos_t position;
-    fgetpos(input_file, &position); //Anfangsposition wird gespeichert
     int lines = count_lines(input_file); //Zeilenanzahl wird gespeichert
     rewind(input_file);
 
@@ -198,18 +191,13 @@ char *search_name(char * input, int search_id)
     }
 
     int i = 0;
-    int j = 0;
+    //int j = 0;
     char string[20];
-    while(j != lines)
+
+    while(fscanf(input_file,"%d | %s\n",&id_array[i], string)!=EOF) //speichert jede Spalte in ein eigenes array
     {
-        fsetpos(input_file, &position);
-        while(fscanf(input_file,"%d | %s\n",&id_array[i], string)!=EOF) //speichert jede Spalte in ein eigenes array
-        {
-            strcpy(name_array[i],string);
-            i++;
-        }
-        fgetpos(input_file, &position);
-        j++;
+        strcpy(name_array[i],string);
+        i++;
     }
     int z;
 
