@@ -41,6 +41,8 @@ int id_name(char * input, char * output, int n)
 
     int names = count_lines(input_file);
     rewind(input_file);
+    
+    printf("\nNamen aller generierten Personen:  \n");
 
     //ID's generieren
     for(int i = 0; i<n; i++)
@@ -60,7 +62,10 @@ int id_name(char * input, char * output, int n)
         fscanf(input_file," %s", name);
         fprintf(output_file,"%s ",name);
         fprintf(output_file,"\n");
+        printf("%s   ",name);
     }
+    
+    printf("\n");
 
     //Dateien wieder schließen
     fclose(input_file);
