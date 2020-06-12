@@ -12,7 +12,7 @@
 //header
 //------------------------------------------------------------------------
 /*
--> zählt Zeilenanzahl einer Datei
+-> zÃ¤hlt Zeilenanzahl einer Datei
 -> parameter:   - Verlauf der Datei
 -> return: Zeilenanzahl
 */
@@ -48,9 +48,9 @@ int interactions(char * output, int n, int max_i, int t);
 
 //------------------------------------------------------------------------
 /*
--> Name wird übergeben
--> gibt ID zurück
--> -1 falls Datei nicht geöffnet werden kann
+-> Name wird Ã¼bergeben
+-> gibt ID zurÃ¼ck
+-> -1 falls Datei nicht geÃ¶ffnet werden kann
 -> -2 falls Name nicht gefunden wird
 */
 int search_id(char * input, char search_name[]);
@@ -58,8 +58,8 @@ int search_id(char * input, char search_name[]);
 
 //------------------------------------------------------------------------
 /*
--> ID wird übergeben
--> gibt Namen (Pointer) zurück
+-> ID wird Ã¼bergeben
+-> gibt Namen (Pointer) zurÃ¼ck
 */
 char *search_name(char * input, int search_id);
 
@@ -73,13 +73,13 @@ int main()
     printf("--------------------Virus-Tracker--------------------\n\n");
 
     printf("Wie viele Personen sollen generiert werden?\n");
-    printf("Personenanzahl (< 100): ");
+    printf("Personenanzahl (< %d): ",people);
     int persons = 0;
     do
     {
         scanf("%d",&persons);
-    }while(persons < 1 || persons > 99);
-    int return_id = id_name("names.csv","id_name.csv",persons);
+    }while(persons < 1 || persons > people);
+    int return_id = id_name("../names.csv","id_name.csv",persons);
     if(return_id!=0)
     {
         printf("\nFEHLER. Programm wird beendet.");
@@ -104,8 +104,9 @@ int main()
     interactions("interactions.csv",persons, ints, days);
 
     printf("Geben Sie den Namen der Infizierten Person ein.\n");
-    printf("Personen koennen in der 'id_name.csv' Datei nachgeschaut werden.\n");
-    printf("(Bitte Datei danach wieder schliessen.)\n");
+    printf("(Bitte einen der oben stehenden Namen.)\n");
+    //printf("Personen koennen in der 'id_name.csv' Datei nachgeschaut werden.\n");
+    //printf("(Bitte Datei danach wieder schliessen.)\n");
     printf("Name: ");
     char name[20];
     int name_id = 0;
@@ -129,7 +130,9 @@ int main()
     printf("--------------------Graphviz-Code--------------------\n");
     printf("Graphviz-Code kann auf 'https://dreampuf.github.io/GraphvizOnline' eingegeben werden.\n");
     return 0;
+    return 0;
 }
+
 
 int count_lines(FILE * input)
 {
@@ -139,7 +142,7 @@ int count_lines(FILE * input)
     {
         if(c == '\n')
         {
-            lines++;        //zählt bis zum Ende des Dokuments jeden Zeilenumbruch
+            lines++;        //zÃ¤hlt bis zum Ende des Dokuments jeden Zeilenumbruch
         }
     c = getc(input);
     }
@@ -151,23 +154,25 @@ int id_name(char * input, char * output, int n)
     srand(time(NULL));
     char c;
 
-    //Dateien öffnen/erstellen
+    //Dateien Ã¶ffnen/erstellen
     FILE *input_file=fopen(input, "r");
     if (input_file == NULL)
     {
-        printf("%s konnte nicht geoeffnet werden.",input_file);
+        printf("%s konnte nicht geoeffnet werden.",input);
         return -1;
     }
 
     FILE *output_file=fopen(output, "w");
     if (output_file == NULL)
     {
-        printf("%s konnte nicht geoeffnet werden.",output_file);
+        printf("%s konnte nicht geoeffnet werden.",output);
         return -2;
     }
 
     int names = count_lines(input_file);
     rewind(input_file);
+
+    printf("\nNamen aller generierten Personen:  \n");
 
     //ID's generieren
     for(int i = 0; i<n; i++)
@@ -187,9 +192,13 @@ int id_name(char * input, char * output, int n)
         fscanf(input_file," %s", name);
         fprintf(output_file,"%s ",name);
         fprintf(output_file,"\n");
+        printf("%s   ",name);
     }
 
-    //Dateien wieder schließen
+    printf("\n");
+    printf("\n");
+
+    //Dateien wieder schlieÃŸen
     fclose(input_file);
     fclose(output_file);
 
@@ -207,7 +216,7 @@ int interactions(char * output, int n, int max_i, int t)
     FILE *output_file=fopen(output, "w");
     if (output_file == NULL)
     {
-        printf("%s konnte nicht geoeffnet werden.",output_file);
+        printf("%s konnte nicht geoeffnet werden.",output);
         return -1;
     }
 
@@ -232,7 +241,7 @@ int interactions(char * output, int n, int max_i, int t)
         fprintf(output_file,"\n");
     }
 
-    //Datei wieder schließen
+    //Datei wieder schlieÃŸen
     fclose(output_file);
 
     return 0;
@@ -243,7 +252,7 @@ int search_id(char * input, char search_name[])
     FILE *input_file=fopen(input, "r");
     if (input_file == NULL)
     {
-        printf("%s konnte nicht geoeffnet werden.",input_file);
+        printf("%s konnte nicht geoeffnet werden.",input);
         return -1;
     }
     //int id = 0;
@@ -265,18 +274,14 @@ int search_id(char * input, char search_name[])
     int i = 0;
     //int j = 0;
     char string[20];
-    //while(j != lines)
-    //{
-        //fsetpos(input_file, &position);
-        while(fscanf(input_file,"%d | %s\n",&id_array[i], string)!=EOF) //speichert jede Spalte in ein eigenes array
-        {
-            strcpy(name_array[i],string);
-            //printf("%s - %s",name_array[i],string);
-            i++;
-        }
-        //fgetpos(input_file, &position);
-        //j++;
-    //}
+
+    while(fscanf(input_file,"%d | %s\n",&id_array[i], string)!=EOF) //speichert jede Spalte in ein eigenes array
+    {
+        strcpy(name_array[i],string);
+      //printf("%s - %s",name_array[i],string);
+        i++;
+    }
+
     int z;
 
         for(i=0;i<lines;i++)
@@ -304,7 +309,7 @@ char *search_name(char * input, int search_id)
     FILE *input_file=fopen(input, "r");
     if (input_file == NULL)
     {
-        printf("%s konnte nicht geoeffnet werden.",input_file);
+        printf("%s konnte nicht geoeffnet werden.",input);
         exit(-1);
         //return -1;
     }
@@ -390,7 +395,7 @@ int dijkstra_algo(int PPL, int contact[PPL][PPL], int patient_null)
     FILE *output_file=fopen("infektionsweg.csv", "w");
     if (output_file == NULL)
     {
-        printf("%s konnte nicht geoeffnet werden.",output_file);
+        printf("%s konnte nicht geoeffnet werden.","infektionsweg.csv");
         return -2;
     }
 
@@ -448,13 +453,6 @@ return counter;
 
 void graphviz(int node_count, char * input_weg)
 {
-    /*FILE *file_ID=fopen(input_ID, "r");
-    if (file_ID == NULL)
-    {
-        printf("%s konnte nicht geoeffnet werden.",input_ID);
-        exit(-1);
-    }*/
-
     FILE *file_weg=fopen(input_weg, "r");
     if (file_weg == NULL)
     {
