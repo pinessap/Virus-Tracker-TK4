@@ -48,8 +48,9 @@ int main()
     interactions("interactions.csv",persons, ints, days);
 
     printf("Geben Sie den Namen der Infizierten Person ein.\n");
-    printf("Personen koennen in der 'id_name.csv' Datei nachgeschaut werden.\n");
-    printf("(Bitte Datei danach wieder schliessen.)\n");
+    printf("(Bitte einen der oben stehenden Namen.)\n");
+    //printf("Personen koennen in der 'id_name.csv' Datei nachgeschaut werden.\n");
+    //printf("(Bitte Datei danach wieder schliessen.)\n");
     printf("Name: ");
     char name[20];
     int name_id = 0;
