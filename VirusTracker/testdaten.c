@@ -66,6 +66,7 @@ int id_name(char * input, char * output, int n)
     }
     
     printf("\n");
+    printf("\n");
 
     //Dateien wieder schließen
     fclose(input_file);

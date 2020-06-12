@@ -5,9 +5,9 @@
 #include "testdaten.h"
 #include "dijkstra.h"
 #include "graphviz.h"
-#define people 100
+#define people 500
 //#define time_period 1                            //Zeitraum, in dem uns die Interaktionen interessieren (in Tagen)
-//#define num_pers 100                             //Anzahl an Leute, die generiert werden soll
+//#define num_pers 100                            //Anzahl an Leute, die generiert werden soll
 //#define num_interact 500                         //Anzahl an Interaktionen insgesamt
 
 
@@ -17,13 +17,13 @@ int main()
     printf("--------------------Virus-Tracker--------------------\n\n");
 
     printf("Wie viele Personen sollen generiert werden?\n");
-    printf("Personenanzahl (< 100): ");
+    printf("Personenanzahl (< %d): ",people);
     int persons = 0;
     do
     {
         scanf("%d",&persons);
-    }while(persons < 1 || persons > 99);
-    int return_id = id_name("names.csv","id_name.csv",persons);
+    }while(persons < 1 || persons > people);
+    int return_id = id_name("../names.csv","id_name.csv",persons);
     if(return_id!=0)
     {
         printf("\nFEHLER. Programm wird beendet.");

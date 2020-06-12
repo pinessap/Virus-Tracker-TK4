@@ -5,12 +5,6 @@
 
 void graphviz(int node_count, char * input_weg)
 {
-    /*FILE *file_ID=fopen(input_ID, "r");
-    if (file_ID == NULL)
-    {
-        printf("%s konnte nicht geoeffnet werden.",input_ID);
-        exit(-1);
-    }*/
 
     FILE *file_weg=fopen(input_weg, "r");
     if (file_weg == NULL)
