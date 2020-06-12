@@ -63,10 +63,18 @@ int main()
     //printf("TEST NAME ID %d",name_id);
 
 
-    printf("\nPersonen mit den laengsten Interaktionen werden ermittelt...\n");
+    printf("\nPersonen mit den laengsten Interaktionen werden ermittelt...\n\n");
     int infect[people][people];
     int node_count = 0;
     node_count = dijkstra_algo(people, infect, name_id);
+    if(node_count == 1)
+    {
+        printf("\n\n----------------------------------------\n");
+        printf("Person hat mit keinen Kontakten interagiert.\n");
+        printf("Programm wird beendet.\n");
+        printf("----------------------------------------\n\n");
+        return 0;
+    }
 
     printf("Graphviz-Code wird ausgegeben...\n\n");
     printf("--------------------Graphviz-Code--------------------\n");

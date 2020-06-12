@@ -19,7 +19,7 @@ int dijkstra_algo(int PPL, int contact[PPL][PPL], int patient_null)
     int min;
 
     for(i=0; i<PPL; i++)    //erstmal beide Matrizen mit 0 initialisieren
-    {
+    {;
         for(j=0; j<PPL; j++)
         {
             contact[i][j]=0;
@@ -63,13 +63,13 @@ int dijkstra_algo(int PPL, int contact[PPL][PPL], int patient_null)
         counter++;
         for(i=1; i<PPL; i++) //alle nicht besuchte nodes sind auf 0 initialisiert visited[]=0
         {
+            //printf("TEST contmin %d\n",contmin[patient_null][i]);
             mintime[i]=mintime[i-1];
             if(mintime[i]<contmin[patient_null][i] && visited[i]==0)
             {
                 //printf("IF min time %d\n", mintime[i]);
                 v=i;
                 mintime[i]=contmin[patient_null][v];
-                //printf("AFTER min time %d\n", mintime[i]);
 
             }
             visited[v]=1;
@@ -87,7 +87,7 @@ int dijkstra_algo(int PPL, int contact[PPL][PPL], int patient_null)
         }
 
     }
-    printf("Letzte infizierte Peron ID %d\n", v);
+    printf("Letzte infizierte Personen-ID %d\n", v);
     fclose(output_file);
 
 return counter;
